@@ -1,49 +1,49 @@
-# AIoT Weather Crawler & Dashboard ??
+# AIoT 天氣爬蟲與儀表板 ??
 
-This project is a weather data crawler and visualization dashboard for Taiwan, built as part of the AIoT course. It fetches weather forecast data from the Taiwan Central Weather Administration (CWA) Open Data API and presents it in an interactive Streamlit web application.
+本專案是 AIoT 課程的一部分，是一個針對台灣的天氣資料爬蟲與視覺化儀表板。它從台灣中央氣象署 (CWA) 開放資料 API 擷取天氣預報資料，並透過互動式的 Streamlit 網頁應用程式呈現。
 
-## Features
+## 功能
 
-- **Data Crawler**: Fetches the latest weather forecast for various locations in Taiwan.
-- **Database**: Stores weather data locally using SQLite (`sqlitedata.db`).
-- **Interactive Dashboard**: Built with Streamlit for easy data exploration.
-- **Visualizations**:
-    - Temperature trends (Min/Max) using Plotly.
-    - Key metrics (Avg Temp, Total Locations).
-    - Detailed data tables.
-- **Data Management**: "Refresh Data" button to trigger the crawler directly from the UI.
+- **資料爬蟲**：擷取台灣各地的最新天氣預報。
+- **資料庫**：使用 SQLite (`sqlitedata.db`) 在地端儲存天氣資料。
+- **互動式儀表板**：使用 Streamlit 建置，方便探索資料。
+- **視覺化**：
+    - 使用 Plotly 繪製溫度趨勢 (最低/最高溫)。
+    - 關鍵指標 (平均溫度、地點總數)。
+    - 詳細資料表。
+- **資料管理**：介面上有「重新整理資料」按鈕，可直接觸發爬蟲更新資料。
 
-## Installation
+## 安裝
 
-1. **Clone the repository**:
+1. **複製專案 (Clone)**：
    ```bash
    git clone https://github.com/Joxanne/AIoT_Weather_Crawler.git
    cd AIoT_Weather_Crawler
    ```
 
-2. **Install dependencies**:
+2. **安裝依賴套件**：
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage
+## 使用方式
 
-1. **Run the Streamlit app**:
+1. **執行 Streamlit 應用程式**：
    ```bash
    streamlit run app.py
    ```
 
-2. **Initialize Data**:
-   - When you first open the app, the database might be empty.
-   - Click the **"? Refresh Data"** button in the sidebar to fetch the latest weather data from the CWA API.
+2. **初始化資料**：
+   - 首次開啟應用程式時，資料庫可能是空的。
+   - 請點擊側邊欄的 **"? Refresh Data"** 按鈕，從 CWA API 擷取最新的天氣資料。
 
-## Project Structure
+## 專案結構
 
-- `app.py`: The main Streamlit application file containing the UI logic and visualizations.
-- `weather_crawler.py`: Contains the logic for fetching data from the API and interacting with the SQLite database.
-- `requirements.txt`: List of Python dependencies.
-- `sqlitedata.db`: SQLite database file (generated automatically).
+- `app.py`: 主要的 Streamlit 應用程式檔案，包含 UI 邏輯與視覺化。
+- `weather_crawler.py`: 包含從 API 擷取資料並與 SQLite 資料庫互動的邏輯。
+- `requirements.txt`: Python 依賴套件列表。
+- `sqlitedata.db`: SQLite 資料庫檔案 (自動產生)。
 
-## Data Source
+## 資料來源
 
-- [Taiwan Central Weather Administration (CWA) Open Data Platform](https://opendata.cwa.gov.tw/)
+- [台灣中央氣象署 (CWA) 開放資料平台](https://opendata.cwa.gov.tw/)
