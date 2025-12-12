@@ -9,7 +9,7 @@ from weather_crawler import crawl_and_save, DB_NAME
 # 1. Page Configuration
 st.set_page_config(
     page_title="Taiwan Weather Dashboard",
-    page_icon="���佗��",
+    page_icon="🌤️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -47,11 +47,11 @@ st.markdown("""
 
 # 3. Sidebar
 with st.sidebar:
-    st.title("���佗�� Weather App")
+    st.title("🌤️ Weather App")
     st.markdown("---")
     
     st.subheader("Data Management")
-    if st.button("���� Refresh Data", use_container_width=True):
+    if st.button("🔄 Refresh Data", use_container_width=True):
         with st.spinner("Fetching latest data from CWA API..."):
             success = crawl_and_save()
             if success:
@@ -89,7 +89,7 @@ try:
             st.metric("Forecast Days", df['date'].nunique())
         with col3:
             avg_max_temp = df['max_temp'].mean()
-            st.metric("Avg Max Temp", f"{avg_max_temp:.1f} 簞C")
+            st.metric("Avg Max Temp", f"{avg_max_temp:.1f} °C")
         with col4:
             last_update = df['created_at'].max().strftime("%Y-%m-%d %H:%M")
             st.metric("Last Updated", last_update)
@@ -100,7 +100,7 @@ try:
         col_filter, col_chart = st.columns([1, 3])
         
         with col_filter:
-            st.subheader("���� Location Filter")
+            st.subheader("📍 Location Filter")
             locations = sorted(df['location'].unique())
             selected_location = st.selectbox("Select Region", locations)
             
@@ -112,13 +112,13 @@ try:
                 current = filtered_df.iloc[0]
                 st.info(f"""
                 **{selected_location}**  
-                ���� {current['date'].strftime('%Y-%m-%d')}  
-                ���∴�� {current['min_temp']} - {current['max_temp']} 簞C  
-                ���儭� {current['weather_desc']}
+                📅 {current['date'].strftime('%Y-%m-%d')}  
+                🌡️ {current['min_temp']} - {current['max_temp']} °C  
+                ☁️ {current['weather_desc']}
                 """)
 
         with col_chart:
-            st.subheader("���� Temperature Trend")
+            st.subheader("📈 Temperature Trend")
             if not filtered_df.empty:
                 fig = go.Figure()
                 
@@ -143,7 +143,7 @@ try:
                 fig.update_layout(
                     title=f"{selected_location} - 7 Day Forecast",
                     xaxis_title="Date",
-                    yaxis_title="Temperature (簞C)",
+                    yaxis_title="Temperature (°C)",
                     hovermode="x unified",
                     template="plotly_white",
                     height=400
@@ -151,20 +151,20 @@ try:
                 st.plotly_chart(fig, use_container_width=True)
 
         # Detailed Data Table
-        st.subheader("���� Detailed Forecast Data")
+        st.subheader("📊 Detailed Forecast Data")
         
         # Formatting for display
         display_df = filtered_df[['date', 'weather_desc', 'min_temp', 'max_temp']].copy()
         display_df['date'] = display_df['date'].dt.strftime('%Y-%m-%d')
-        display_df.columns = ['Date', 'Weather Condition', 'Min Temp (簞C)', 'Max Temp (簞C)']
+        display_df.columns = ['Date', 'Weather Condition', 'Min Temp (°C)', 'Max Temp (°C)']
         
         st.dataframe(
             display_df,
             use_container_width=True,
             hide_index=True,
             column_config={
-                "Min Temp (簞C)": st.column_config.NumberColumn(format="%.1f 簞C"),
-                "Max Temp (簞C)": st.column_config.NumberColumn(format="%.1f 簞C"),
+                "Min Temp (°C)": st.column_config.NumberColumn(format="%.1f °C"),
+                "Max Temp (°C)": st.column_config.NumberColumn(format="%.1f °C"),
             }
         )
 
